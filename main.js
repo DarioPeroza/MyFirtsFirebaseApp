@@ -1,33 +1,54 @@
 //---------------------------------------------Vars---------------------------------------------
 const auth          = firebase.auth();                          //Firebase Auth object
 const initUser      = document.querySelectorAll(".initUser");   //Select forms
+const singInModal   = $("#singInModal");                        //Select modal of singIn
 const singInForm    = initUser[0];                              //Select form of singIn
+const singUpModal   = $("#singUpModal");                        //Select modal of singUp
 const singUpForm    = initUser[1];                              //Select form of singUp
 
 //---------------------------------------------Functions---------------------------------------------
 
-function captureForm(form, isNewUser = true) {
-
-    if(isNewUser){
-        console.log("New user:");
-    }
-
-    if (!isNewUser) {
-        console.log("Register user:");
-    }
-
-    console.log(form[0].value);
-    console.log(form[1].value);
+function resetModal(form, modalBox) {
+    
 }
+
+function captureUserAuthData(form) {
+
+    let userAuthData            = {};
+        userAuthData.email      = form[0].value;
+        userAuthData.password   = form[1].value;
+
+    return userAuthData;
+
+}
+
+function registerNewUser(){
+
+    let user = captureUserAuthData(singUpForm);
+    
+    resetModal(singUpForm, singUpModal)
+
+    auth
+        .createUserWithEmailAndPassword(user.email, user.password)
+        .then(userCredential => {
+            console.log("Hello new user");
+        })
+
+}
+
+function getRegisterUser(email, password) {
+    console.log("Hello old user");
+}
+
 
 //-----------------------------------------------Events-----------------------------------------------
 
 singUpForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    captureForm(singUpForm);
+    registerNewUser();
 });
 
 singInForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    captureForm(singInForm, false);
+    getRegisterUser();
 });

@@ -1,8 +1,8 @@
 //---------------------------------------------Vars---------------------------------------------
-const auth          = firebase.auth(); //Firebase Auth object
-const initUser      = document.querySelectorAll(".initUser");
-const singInForm    = initUser[0];
-const singUpForm    = initUser[1];
+const auth          = firebase.auth();                          //Firebase Auth object
+const initUser      = document.querySelectorAll(".initUser");   //Select forms
+const singInForm    = initUser[0];                              //Select form of singIn
+const singUpForm    = initUser[1];                              //Select form of singUp
 
 //---------------------------------------------Functions---------------------------------------------
 

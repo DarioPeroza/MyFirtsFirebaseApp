@@ -1,9 +1,7 @@
 //---------------------------------------------Vars---------------------------------------------
 const auth          = firebase.auth();                          //Firebase Auth object
 const initUser      = document.querySelectorAll(".initUser");   //Select forms
-const singInModal   = $("#singInModal");                        //Select modal of singIn
 const singInForm    = initUser[0];                              //Select form of singIn
-const singUpModal   = $("#singUpModal");                        //Select modal of singUp
 const singUpForm    = initUser[1];                              //Select form of singUp
 
 //---------------------------------------------Functions---------------------------------------------

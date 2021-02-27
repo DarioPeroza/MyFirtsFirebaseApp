@@ -36,17 +36,23 @@ function registerNewUser(){
 
     let user = captureUserAuthData(singUpForm);
     let modal = "singUpModal";
+    let userCreated = Boolean;
+        userCreated = false;
     
-    hideModal(modal)
-
     auth
-        .createUserWithEmailAndPassword(user.email, user.password)
-        .then(userCredential => {
-            console.log("Hello new user");
-        })
+    .createUserWithEmailAndPassword(user.email, user.password)
+    .then(userCredential => {
+        userCreated = true;
+    })
+    
+    if (userCreated) {
+        hideModal(modal);
+    } else {
+        alert("Invalid Email");
+    }
 
     resetForm(singUpForm);
-    
+
 }
 
 function getRegisterUser(email, password) {

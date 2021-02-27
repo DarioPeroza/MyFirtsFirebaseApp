@@ -6,8 +6,20 @@ const singUpForm    = initUser[1];                              //Select form of
 
 //---------------------------------------------Functions---------------------------------------------
 
-function resetModal(form, modalBox) {
-    
+function hideModal(id) {
+
+    if (id[0] != "#") {
+        id = "#" + id;
+    }
+
+    $(id).modal('hide');
+
+}
+
+function resetForm(form) {
+
+    form.reset('hide');
+
 }
 
 function captureUserAuthData(form) {
@@ -23,8 +35,9 @@ function captureUserAuthData(form) {
 function registerNewUser(){
 
     let user = captureUserAuthData(singUpForm);
+    let modal = "singUpModal";
     
-    resetModal(singUpForm, singUpModal)
+    hideModal(modal)
 
     auth
         .createUserWithEmailAndPassword(user.email, user.password)
@@ -32,12 +45,13 @@ function registerNewUser(){
             console.log("Hello new user");
         })
 
+    resetForm(singUpForm);
+    
 }
 
 function getRegisterUser(email, password) {
     console.log("Hello old user");
 }
-
 
 //-----------------------------------------------Events-----------------------------------------------
 

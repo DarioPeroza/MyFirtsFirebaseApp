@@ -1,15 +1,21 @@
 //---------------------------------------------Vars---------------------------------------------
 const auth          = firebase.auth();                          //Firebase Auth object
 const initUser      = document.querySelectorAll(".initUser");   //Select forms
-const singInModal   = $("#singInModal");                        //Select modal of singIn
 const singInForm    = initUser[0];                              //Select form of singIn
-const singUpModal   = $("#singUpModal");                        //Select modal of singUp
 const singUpForm    = initUser[1];                              //Select form of singUp
 
 //---------------------------------------------Functions---------------------------------------------
 
-function resetModal(form, modalBox) {
-    
+function hideModal(modalId) {
+
+    if (modalId[0] != "#") {
+
+        modalId = "#" + modalId;
+
+    }
+
+    $(modalId).modal('hide');
+
 }
 
 function captureUserAuthData(form) {
@@ -25,13 +31,20 @@ function captureUserAuthData(form) {
 function registerNewUser(){
 
     let user = captureUserAuthData(singUpForm);
+    let modalId = "singUpModal";
     
-    resetModal(singUpForm, singUpModal)
-
     auth
         .createUserWithEmailAndPassword(user.email, user.password)
         .then(userCredential => {
-            console.log("Hello new user");
+            console.log(userCredential);
+        })
+        .then(() => {
+            alert("Success!");
+            singUpForm.reset();
+            hideModal(modalId);
+        }, () => {
+            alert("Try another email");
+            singUpForm.reset();
         })
 
 }

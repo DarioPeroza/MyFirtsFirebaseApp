@@ -1,8 +1,9 @@
 //---------------------------------------------Vars---------------------------------------------
-const auth          = firebase.auth();                          //Firebase Auth object
-const initUser      = document.querySelectorAll(".initUser");   //Select forms
-const singInForm    = initUser[0];                              //Select form of singIn
-const singUpForm    = initUser[1];                              //Select form of singUp
+const auth          = firebase.auth();                              //Firebase Auth object
+const initUser      = document.querySelectorAll(".initUser");       //Select forms
+const singInForm    = initUser[0];                                  //Select form of singIn
+const singUpForm    = initUser[1];                                  //Select form of singUp
+const logoutButton  = document.querySelector("#logoutButton");      //Select logout Button
 
 //---------------------------------------------Functions---------------------------------------------
 
@@ -80,3 +81,10 @@ singInForm.addEventListener("submit", (e) => {
     e.preventDefault();
     initSession();
 });
+
+logoutButton.addEventListener("click", (e) => {
+    (e).preventDefault();
+    auth.signOut().then(() => {
+        alert("You are out");
+    })
+})

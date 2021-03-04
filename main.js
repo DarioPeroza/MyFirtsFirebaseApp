@@ -6,21 +6,6 @@ const singUpForm    = initUser[1];                              //Select form of
 
 //---------------------------------------------Functions---------------------------------------------
 
-<<<<<<< HEAD
-function hideModal(id) {
-
-    if (id[0] != "#") {
-        id = "#" + id;
-    }
-
-    $(id).modal('hide');
-
-}
-
-function resetForm(form) {
-
-    form.reset('hide');
-=======
 function hideModal(modalId) {
 
     if (modalId[0] != "#") {
@@ -30,7 +15,6 @@ function hideModal(modalId) {
     }
 
     $(modalId).modal('hide');
->>>>>>> main
 
 }
 
@@ -47,25 +31,6 @@ function captureUserAuthData(form) {
 function registerNewUser(){
 
     let user = captureUserAuthData(singUpForm);
-<<<<<<< HEAD
-    let modal = "singUpModal";
-    let userCreated = Boolean;
-        userCreated = false;
-    
-    auth
-    .createUserWithEmailAndPassword(user.email, user.password)
-    .then(userCredential => {
-        userCreated = true;
-    })
-    
-    if (userCreated) {
-        hideModal(modal);
-    } else {
-        alert("Invalid Email");
-    }
-
-    resetForm(singUpForm);
-=======
     let modalId = "singUpModal";
     
     auth
@@ -81,7 +46,6 @@ function registerNewUser(){
             alert("Try another email");
             singUpForm.reset();
         })
->>>>>>> main
 
 }
 

@@ -1,74 +1,24 @@
+// Need loginFunctions.js & simpleFunctions.js to work
 //---------------------------------------------Vars---------------------------------------------
-const auth          = firebase.auth();                              //Firebase Auth object
 const initUser      = document.querySelectorAll(".initUser");       //Select forms
 const singInForm    = initUser[0];                                  //Select form of singIn
 const singUpForm    = initUser[1];                                  //Select form of singUp
 const logoutButton  = document.querySelector("#logoutButton");      //Select logout Button
+const navLinks      = document.querySelectorAll(".nav-link");       //Select all nav-link
+const singInNavLink = navLinks[0];
+const singUpNavLink = navLinks[1];
+const logoutNavLink = navLinks[2];
 
 //---------------------------------------------Functions---------------------------------------------
 
-function hideModal(modalId) {                   //function for hide modal with id
-
-    if (modalId[0] != "#") {
-
-        modalId = "#" + modalId;
-
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        console.log(user);
+        switchNavLinks();
+    } else {
+        console.log("User does not exist");
     }
-
-    $(modalId).modal('hide');
-
-}
-
-function captureUserAuthData(form) {            //capture user credential of form
-
-    let userAuthData            = {};
-        userAuthData.email      = form[0].value;
-        userAuthData.password   = form[1].value;
-
-    return userAuthData;
-
-}
-
-function registerNewUser(){                     //Register function
-
-    let user = captureUserAuthData(singUpForm);
-    let modalId = "singUpModal";
-    
-    auth
-        .createUserWithEmailAndPassword(user.email, user.password)
-        .then(userCredential => {
-            console.log(userCredential);
-        })
-        .then(() => {
-            alert("Success!");
-            singUpForm.reset();
-            hideModal(modalId);
-        }, () => {
-            alert("Try another email");
-            singUpForm.reset();
-        })
-
-}
-
-function initSession() {                        //Start session
-
-    let user = captureUserAuthData(singInForm);
-    let modalId = "singInModal";
-    
-    auth
-        .signInWithEmailAndPassword(user.email, user.password)
-        .then(userCredential => {
-            console.log(userCredential);
-        })
-        .then(() => {
-            alert("Success!");
-            singInForm.reset();
-            hideModal(modalId);
-        }, () => {
-            alert("Invalid email or password");
-            singInForm.reset();
-        })
-}
+});
 
 //-----------------------------------------------Events-----------------------------------------------
 
@@ -84,7 +34,8 @@ singInForm.addEventListener("submit", (e) => {
 
 logoutButton.addEventListener("click", (e) => {
     (e).preventDefault();
-    auth.signOut().then(() => {
-        alert("You are out");
-    })
+    auth.signOut()
+        .then(() => {
+        switchNavLinks();
+        })
 })

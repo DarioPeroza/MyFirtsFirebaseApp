@@ -29,7 +29,7 @@
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#singUpModal">Sing Up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="logoutButton">Log Out</a>
+                        <a class="nav-link disabled" href="#" id="logoutButton">Log Out</a>
                     </li>
                 </ul>
             </div>
@@ -43,7 +43,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Login</h5>
+                    <h5 class="modal-title">Sing In</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -70,7 +70,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Logup</h5>
+                    <h5 class="modal-title">Sing Up</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -104,8 +104,9 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#available-libraries -->
 
-    <!-- Firebase auth -->
+    <!-- Firebase services -->
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
 
     <script>
     // Your web app's Firebase configuration
@@ -119,9 +120,17 @@
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+
+    const auth          = firebase.auth();
+    const firestore     = firebase.firestore();
+
     </script>
 
+    <!-- Custom scripts -->
+    <script src="/js/simpleFunctions.js"></script>
+    <script src="/js/loginFunctions.js"></script>
     <script src="main.js"></script>
+
 </body>
 
 </html>

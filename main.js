@@ -17,11 +17,11 @@ function writePosts(snapshot) {
     snapshot.forEach(doc => {
         let post = doc.data()
         let article = `
-            <article>
+            <li class="list-group-item list-group-item-action">
                 <h3>${post.title}</h3>
                 <section>${post.body}</section>
                 <p>${post.author}</p>
-            </article>
+            </li>
         `;
         write += article;
     });

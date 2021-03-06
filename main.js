@@ -63,8 +63,11 @@ logoutButton.addEventListener("click", (e) => {
 googleSingInButton.addEventListener("click", e => {
     var provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider)
-        .then(result => {
-            console.log(result);
+        .then(() => {
+            hideModal("singInModal");
+        })
+        .then(() => {
+            alert("Try to sign up");
         })
 });
 

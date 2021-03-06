@@ -20,6 +20,8 @@ const facebookSingInButton  = facebookButtons[0];
 const facebookSingUpButton  = facebookButtons[1];
 // Posts container
 const postsContainer        = document.getElementById("allPostContainer");
+// Providers
+const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 
 //---------------------------------------------Functions---------------------------------------------
 
@@ -37,6 +39,17 @@ function writePosts(snapshot) {
         write += article;
     });
     postsContainer.innerHTML = write;
+}
+
+function singInWith(provider) {
+    auth.signUpWithPopup(provider)
+        .then(() => {
+            hideModal("singUpModal");
+            singInForm.reset();
+        })
+        .then(() => {
+            alert("Try with sign in");
+        })
 }
 
 //-----------------------------------------------Events-----------------------------------------------
@@ -62,27 +75,11 @@ logoutButton.addEventListener("click", (e) => {
 })
 
 googleSingInButton.addEventListener("click", () => {
-    let provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider)
-        .then(() => {
-            hideModal("singInModal");
-            singInForm.reset();
-        })
-        .then(() => {
-            alert("Try with sign up");
-        })
+    singInWith(GoogleProvider);
 });
 
 googleSingUpButton.addEventListener("click", () => {
-    let provider = new firebase.auth.GoogleAuthProvider();
-    auth.signUpWithPopup(provider)
-        .then(() => {
-            hideModal("singUpModal");
-            singInForm.reset();
-        })
-        .then(() => {
-            alert("Try with sign in");
-        })
+    singInWith(GoogleProvider);
 });
 
 //facebookSingInButton.addEventListener("click", );

@@ -56,25 +56,36 @@ logoutButton.addEventListener("click", (e) => {
     (e).preventDefault();
     auth.signOut()
         .then(() => {
-        switchNavLinks();
+            switchNavLinks();
+            postsContainer.innerHTML = "";
         })
 })
 
-googleSingInButton.addEventListener("click", e => {
-    var provider = new firebase.auth.GoogleAuthProvider();
+googleSingInButton.addEventListener("click", () => {
+    let provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider)
         .then(() => {
             hideModal("singInModal");
+            singInForm.reset();
         })
         .then(() => {
-            alert("Try to sign up");
+            alert("Try with sign up");
         })
 });
 
-//googleSingUpButton.addEventListener("click", );
+googleSingUpButton.addEventListener("click", () => {
+    let provider = new firebase.auth.GoogleAuthProvider();
+    auth.signUpWithPopup(provider)
+        .then(() => {
+            hideModal("singUpModal");
+            singInForm.reset();
+        })
+        .then(() => {
+            alert("Try with sign in");
+        })
+});
 
 //facebookSingInButton.addEventListener("click", );
-
 //facebookSingUpButton.addEventListener("click", );
 
 // auth event...
@@ -86,7 +97,5 @@ auth.onAuthStateChanged((user) => {
                  .then((snapshot) => {
                      writePosts(snapshot);
                  })
-    } else {
-        postsContainer.innerHTML = "";
     }
 });

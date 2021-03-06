@@ -42,7 +42,7 @@ function writePosts(snapshot) {
 }
 
 function singInWith(provider) {
-    auth.signUpWithPopup(provider)
+    auth.signInWithPopup(provider)
         .then(() => {
             hideModal("singUpModal");
             singInForm.reset();

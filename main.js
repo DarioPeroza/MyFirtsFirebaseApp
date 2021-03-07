@@ -46,8 +46,7 @@ function singInWith(provider) {
         .then(() => {
             hideModal("singUpModal");
             singInForm.reset();
-        })
-        .then(() => {
+        }, () => {
             alert("Try with sign in");
         })
 }
